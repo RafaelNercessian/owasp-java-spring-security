@@ -4,10 +4,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/usuario")
+
 public class UsuarioController {
 	
-	public String usuarioLogado(){
+	@RequestMapping("/login")
+	public String login(){
+		return "login";
+	}
+	
+	@RequestMapping("/usuario")
+	public String usuario(){
 		return "usuarioLogado";
 	}
 	
