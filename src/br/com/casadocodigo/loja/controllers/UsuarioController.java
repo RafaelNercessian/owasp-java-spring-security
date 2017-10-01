@@ -17,9 +17,9 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioDao dao;
 	
-	@RequestMapping("/login_teste")
+	@RequestMapping("/login")
 	public String login(){
-		return "login_teste";
+		return "login";
 	}
 	
 	@RequestMapping("/usuario")

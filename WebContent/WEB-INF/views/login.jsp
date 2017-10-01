@@ -18,14 +18,14 @@
 					<p class="pull-left" style="color: red; font-weight: bold">${mensagem}</p>
 					<div class="row">
 						<div class="col-lg-12">
-							<form id="login-form" action="${s:mvcUrl('UC#usuario').build()}" method="post" role="form"
+							<form:form servletRelativeAction="/login" id="login-form" method="post" role="form"
 								style="display: block;">
 								<div class="form-group">
-									<input type="text" name="email" id="email" tabindex="1"
+									<input type="text" name="username" id="email" tabindex="1"
 										class="form-control" placeholder="E-mail" value="">
 								</div>
 								<div class="form-group">
-									<input type="password" name="senha" id="senha" tabindex="2"
+									<input type="password" name="password" id="senha" tabindex="2"
 										class="form-control" placeholder="Senha"> <input
 										type="hidden" name="${_csrf.parameterName}"
 										value="${_csrf.token}" />
@@ -39,7 +39,7 @@
 										</div>
 									</div>
 								</div>
-							</form>
+							</form:form>
 							<form:form id="register-form" action="" method="post" role="form"
 								style="display: none;" commandName="usuario"
 								enctype="multipart/form-data">
