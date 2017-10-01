@@ -95,7 +95,7 @@ public class Usuario implements Serializable, UserDetails {
 
 	@Override
 	public String getPassword() {
-		return null;
+		return senha;
 	}
 
 	@Override
