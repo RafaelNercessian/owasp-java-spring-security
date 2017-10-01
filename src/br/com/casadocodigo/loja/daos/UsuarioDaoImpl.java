@@ -47,10 +47,9 @@ public class UsuarioDaoImpl implements UsuarioDao, UserDetailsService {
 		}
 	}
 
-	public Usuario procuraUsuario(Usuario usuario) {
+	public Usuario procuraUsuario(String email) {
 		String query = "SELECT * FROM usuarios WHERE email=" + "'"
-				+ usuario.getEmail() + "'" + " and senha=" + "'"
-				+ usuario.getSenha() + "';";
+				+ email + "';";
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet results = statement.executeQuery(query);
