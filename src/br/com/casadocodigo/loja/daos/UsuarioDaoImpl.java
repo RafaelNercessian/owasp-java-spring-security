@@ -21,25 +21,30 @@ import br.com.casadocodigo.loja.util.ConnectionFactory;
 @Repository
 public class UsuarioDaoImpl implements UsuarioDao, UserDetailsService {
 
-	// Será usado na primeira aula, depois mudaremos para o EntityManager
+	// Serï¿½ usado na primeira aula, depois mudaremos para o EntityManager
 	Connection connection = new ConnectionFactory().getConnection();
 
-	// Será usado mais adiante
+	// Serï¿½ usado mais adiante
 	@PersistenceContext
 	private EntityManager manager;
 
 	public void salva(Usuario usuario) {
-		String query = "insert into usuarios (email,senha,nome,nomeImagem) values ('"
+		String query1 = "insert into usuarios (email,senha,nome,role,nomeImagem) values ('"
 				+ usuario.getEmail()
 				+ "','"
 				+ usuario.getSenha()
 				+ "','"
 				+ usuario.getNome()
 				+ "','"
+				+ usuario.getRole()
+				+ "','"
 				+ usuario.getNomeImagem() + "');";
+		String query2="insert into usuarios_Role(Usuario_email,roles_name) VALUES('"+usuario.getEmail()+"','"+usuario.getRole()+"');";
 		try {
 			Statement statement = connection.createStatement();
-			statement.executeUpdate(query);
+			statement.executeUpdate(query1);
+			Statement statement2 = connection.createStatement();
+			statement2.executeUpdate(query2);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
