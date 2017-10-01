@@ -29,14 +29,12 @@ public class UsuarioDaoImpl implements UsuarioDao, UserDetailsService {
 	private EntityManager manager;
 
 	public void salva(Usuario usuario) {
-		String query = "insert into usuarios (email,senha,nome,role,nomeImagem) values ('"
+		String query = "insert into usuarios (email,senha,nome,nomeImagem) values ('"
 				+ usuario.getEmail()
 				+ "','"
 				+ usuario.getSenha()
 				+ "','"
 				+ usuario.getNome()
-				+ "','"
-				+ usuario.getRole()
 				+ "','"
 				+ usuario.getNomeImagem() + "');";
 		try {

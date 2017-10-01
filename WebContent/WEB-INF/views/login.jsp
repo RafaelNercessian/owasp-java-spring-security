@@ -40,7 +40,7 @@
 									</div>
 								</div>
 							</form:form>
-							<form:form id="register-form" action="" method="post" role="form"
+							<form:form id="register-form" action="${s:mvcUrl('UC#registrar').build()}" method="post" role="form"
 								style="display: none;" commandName="usuario"
 								enctype="multipart/form-data">
 								<div class="form-group">
@@ -59,6 +59,10 @@
 									<label for="imagem">Imagem perfil: </label> <input type="file"
 										name="imagem" multiple="multiple" />
 								</div>
+								
+								 <input
+										type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 
 								<div class="form-group">
 									<div class="row" style="margin-top: 5%">
