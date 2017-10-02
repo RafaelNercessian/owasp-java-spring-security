@@ -53,7 +53,7 @@ public class UsuarioController {
 		chamaLogicaParaTratarImagem(usuario, request);
 		usuario.setRoles(Arrays.asList(new Role()));
 		dao.salva(usuario);
-//		authenticateUserAndSetSession(usuario, request);
+		authenticateUserAndSetSession(usuario, request);
 		model.addAttribute("usuario", usuario);
 		return "usuarioLogado";
 
@@ -65,10 +65,7 @@ public class UsuarioController {
 		String password = usuario.getSenha();
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
 				username, password);
-
-		// generate session if one doesn't exist
 		request.getSession();
-
 		token.setDetails(new WebAuthenticationDetails(request));
 		Authentication authenticatedUser = authenticationManager
 				.authenticate(token);
