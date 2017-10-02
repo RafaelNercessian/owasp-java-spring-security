@@ -51,13 +51,14 @@ public class UsuarioController {
 	public String registrar(@ModelAttribute("usuario") Usuario usuario,
 			RedirectAttributes redirect, HttpServletRequest request, Model model) {
 		chamaLogicaParaTratarImagem(usuario, request);
+		usuario.setRoles(Arrays.asList(new Role()));
 		dao.salva(usuario);
 //		authenticateUserAndSetSession(usuario, request);
 		model.addAttribute("usuario", usuario);
 		return "usuarioLogado";
 
 	}
-
+	
 	private void authenticateUserAndSetSession(Usuario usuario,
 			HttpServletRequest request) {
 		String username = usuario.getEmail();

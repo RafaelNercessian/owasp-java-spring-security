@@ -22,9 +22,9 @@ public class UsuarioDaoImpl implements UsuarioDao, UserDetailsService {
 	}
 
 	public Usuario procuraUsuario(String email) {
-		TypedQuery<Usuario> query = manager
-				.createQuery("select u from Usuario u where u.email =: email",
-						Usuario.class).setParameter("email", email);
+		TypedQuery<Usuario> query = manager.createQuery(
+				"select u from Usuario u where u.email =:email", Usuario.class)
+				.setParameter("email", email);
 		Usuario usuarioRetornado = query.getResultList().stream().findFirst()
 				.orElse(null);
 		return usuarioRetornado;
@@ -33,9 +33,11 @@ public class UsuarioDaoImpl implements UsuarioDao, UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		Usuario usuario = manager.createQuery("select u from Usuario u where u.email = :email", Usuario.class)
-				.setParameter("email", username).getResultList().stream().findFirst().orElse(null);
+		Usuario usuario = manager
+				.createQuery("select u from Usuario u where u.email =:email",
+						Usuario.class).setParameter("email", username)
+				.getResultList().stream().findFirst().orElse(null);
 		return usuario;
-		
+
 	}
 }
