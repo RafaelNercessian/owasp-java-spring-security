@@ -1,44 +1,40 @@
 package br.com.casadocodigo.loja.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "USUARIO")
 public class Usuario implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name = "EMAIL")
 	private String email;
 	private String senha;
 	private String nome;
-	private String role="ROLE_USER";
 	@Transient
 	private MultipartFile imagem;
 	private String nomeImagem;
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Role> roles = new ArrayList<>();
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
+	@JoinTable(name = "USUARIO_ROLE", joinColumns = { @JoinColumn(name = "EMAIL") }, inverseJoinColumns = { @JoinColumn(name = "NAME") })
+	private List<Role> roles;
 
 	public String getEmail() {
 		return email;
@@ -63,7 +59,7 @@ public class Usuario implements Serializable, UserDetails {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public List<Role> getRoles() {
 		return roles;
 	}
