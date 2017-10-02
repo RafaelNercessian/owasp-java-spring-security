@@ -2,6 +2,11 @@
 <div class="container" style="margin-top: 10%">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
+			<c:if test="${param.logout != null}">
+				<div class="alert alert-success">
+					<p>Usuário deslogado com sucesso.</p>
+				</div>
+			</c:if>
 			<div class="panel panel-login">
 				<div class="panel-heading">
 					<div class="row">
@@ -18,8 +23,8 @@
 					<p class="pull-left" style="color: red; font-weight: bold">${mensagem}</p>
 					<div class="row">
 						<div class="col-lg-12">
-							<form:form servletRelativeAction="/login" id="login-form" method="post" role="form"
-								style="display: block;">
+							<form:form servletRelativeAction="/login" id="login-form"
+								method="post" role="form" style="display: block;">
 								<div class="form-group">
 									<input type="text" name="username" id="email" tabindex="1"
 										class="form-control" placeholder="E-mail" value="">
@@ -40,8 +45,9 @@
 									</div>
 								</div>
 							</form:form>
-							<form:form id="register-form" action="${s:mvcUrl('UC#registrar').build()}" method="post" role="form"
-								style="display: none;" commandName="usuario"
+							<form:form id="register-form"
+								action="${s:mvcUrl('UC#registrar').build()}" method="post"
+								role="form" style="display: none;" commandName="usuario"
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<input type="text" name="nome" id="nome" tabindex="1"
@@ -59,10 +65,9 @@
 									<label for="imagem">Imagem perfil: </label> <input type="file"
 										name="imagem" multiple="multiple" />
 								</div>
-								
-								 <input
-										type="hidden" name="${_csrf.parameterName}"
-										value="${_csrf.token}" />
+
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
 
 								<div class="form-group">
 									<div class="row" style="margin-top: 5%">
