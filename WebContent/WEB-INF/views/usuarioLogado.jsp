@@ -13,7 +13,7 @@
 			</p>
 			<hr>
 		</div>
-
+		<a href="<c:url value="/logout" />">Logout</a>
 
 	</div>
 </div>

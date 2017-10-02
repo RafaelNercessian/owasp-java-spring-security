@@ -6,6 +6,7 @@ import java.security.Principal;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -39,6 +41,15 @@ public class UsuarioController {
 	public String login() {
 		return "login";
 	}
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logout (HttpServletRequest request, HttpServletResponse response) {
+	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    if (auth != null){    
+	        new SecurityContextLogoutHandler().logout(request, response, auth);
+	    }
+	    return "redirect:/login?logout";
+	}
 
 	@RequestMapping("/usuario")
 	public String usuario(Principal principal, Model model) {
@@ -53,13 +64,13 @@ public class UsuarioController {
 		chamaLogicaParaTratarImagem(usuario, request);
 		usuario.setRoles(Arrays.asList(new Role()));
 		dao.salva(usuario);
-		authenticateUserAndSetSession(usuario, request);
+		autenticaUsuarioEConfiguraSessao(usuario, request);
 		model.addAttribute("usuario", usuario);
 		return "usuarioLogado";
 
 	}
 	
-	private void authenticateUserAndSetSession(Usuario usuario,
+	private void autenticaUsuarioEConfiguraSessao(Usuario usuario,
 			HttpServletRequest request) {
 		String username = usuario.getEmail();
 		String password = usuario.getSenha();
